@@ -1,6 +1,8 @@
 # Products
 制作物
 
+ポートフォリオURL：https://sites.google.com/da.iwasaki.ac.jp/takafumi-neya/
+
 **MagicBlaster**  
 DirectX12の学習で制作したライブラリ上で、二種類の攻撃を使い分けてスコアを稼ぐアクションゲームが実装されています。
 
