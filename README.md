@@ -27,7 +27,7 @@ HitChecker.h/cpp
 衝突判定オブジェクトが定義されているCollision.h/cppや、  
 四分木空間分割で衝突判定の最適化を行うCollisionTrees.hと合わせて機能しています。  
 
-Utilityフォルダ  
+Utilityフォルダ内
 MemoryBuff.h  
 配置new用にメモリ管理を補助するオブジェクト。  
 
