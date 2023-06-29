@@ -32,7 +32,7 @@ MemoryBuff.h
 配置new用にメモリ管理を補助するオブジェクト。  
 
 MyArray.h  
-自作の簡易コンテナクラス。  
+自作の簡易的な動的配列コンテナクラス。  
 
 
 **CollisionTrees**  
