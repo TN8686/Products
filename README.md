@@ -25,20 +25,26 @@ ObjectManager.h/cpp
 HitChecker.h/cpp  
 衝突判定を行います。  
 衝突判定オブジェクトが定義されているCollision.h/cppや、  
-四分木空間分割で衝突判定の最適化を行うCollisionTrees.hと合わせて機能しています。  
+最適化を行うCollisionTrees.hと合わせて機能しています。  
 
-Utilityフォルダ内
+CollisionTrees.h  
+四分木空間分割による衝突判定の最適化を行っています。  
+
+Matrix.h/cpp  
+座標変換用の4×4の行列。  
+拡大縮小、回転、平行移動などの座標変換マトリクスや、逆マトリクス、転置マトリクス等を生成でき、  
+マトリクス同士、マトリクスとVector3、Vector4との乗算で利用できます。  
+学習目的で自分で定義してみました。  
+
+Utilityフォルダ内  
 MemoryBuff.h  
 配置new用にメモリ管理を補助するオブジェクト。  
+MemoryBuffは、単純に確保と解放のみを行うオブジェクト。  
+MemoryPoolは、固定長方式のメモリ管理オブジェクトで、オブジェクトの配置、破棄も肩代わりしてくれます。  
 
 MyArray.h  
-自作の簡易的な動的配列コンテナクラス。  
+自作の簡易的な動的配列コンテナクラスです。  
 
-
-**CollisionTrees**  
-四分木空間分割による衝突判定の最適化の学習。  
-上記のGameLibrary上で動作している単純な作品に適用してみています。
-Engineフォルダ内のCollisionTrees.hに記述されています。  
 
 **Xevious_clone**  
 一年次に制作したXeviousの再現ゲーム。  
