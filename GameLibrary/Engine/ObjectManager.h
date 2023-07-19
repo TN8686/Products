@@ -76,9 +76,10 @@ namespace Engine {
 
 		// TODO 名前からオブジェクトを検索.
 		//bool getObjectByName(const std::string& name, GameObject* ref);
-		//bool getObjectByName(size_t& hash, GameObject* ref);
+		//bool getObjectByNameHash(size_t& hash, GameObject* ref);
 
 		bool init();
+		bool preUpdate();
 		bool update();
 		bool lateUpdate();
 		bool render();

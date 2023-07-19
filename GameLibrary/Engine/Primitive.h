@@ -217,6 +217,88 @@ namespace Engine {
 		operator Vector2();
 	};
 
+	struct Vector4 {
+		float x, y, z, w;
+		Vector4()
+			: x(0.0f)
+			, y(0.0f)
+			, z(0.0f)
+			, w(0.0f)
+		{}
+		Vector4(float x, float y, float z, float w)
+			: x(x)
+			, y(y)
+			, z(z)
+			, w(w)
+		{}
+
+		Vector4 operator +(const Vector4& r) const {
+			return Vector4(x + r.x, y + r.y, z + r.z, w + r.w);
+		}
+
+		Vector4 operator -(const Vector4& r) const {
+			return Vector4(x - r.x, y - r.y, z - r.z, w - r.w);
+		}
+
+		Vector4 operator -() const {
+			return Vector4(x * -1.0f, y * -1.0f, z * -1.0f, w);
+		}
+
+		Vector4 operator *(const Vector4& r) const {
+			return Vector4(x * r.x, y * r.y, z * r.z, w);
+		}
+
+		Vector4 operator /(const Vector4& r) const {
+			return Vector4(x / r.x, y / r.y, z / r.z, w);
+		}
+
+		Vector4 operator *(float r) const {
+			return Vector4(x * r, y * r, z * r, w);
+		}
+
+		Vector4 operator /(float r) const {
+			return Vector4(x / r, y / r, z / r, w);
+		}
+
+		float dot(const Vector4& r) const {
+			return x * r.x + y * r.y + z * r.z + w * r.w;
+		}
+
+		Vector4 cross(const Vector4& r) const {
+			return Vector4(y * r.z - z * r.y, z * r.x - x * r.z, x * r.y - y * r.x, 0.0f);
+		}
+
+		float length() const {
+			return sqrtf(lengthSquare());
+		}
+
+		float lengthSquare() const {
+			return x * x + y * y + z * z + w * w;
+		}
+
+		// ‚’¼ŠÖŒW‚É‚ ‚é‚©‚ğ•Ô‚µ‚Ü‚·.
+		bool isVertical(const Vector4& r) const {
+			float d = dot(r);
+			return ((d > -EPSILON) && (d < EPSILON));	// Œë·”ÍˆÍ“à‚È‚ç‚’¼‚Æ”»’è.
+		}
+
+		// •½sŠÖŒW‚É‚ ‚é‚©‚ğ•Ô‚µ‚Ü‚·.
+		bool isParallel(const Vector4& r) const {
+			float d = cross(r).lengthSquare();
+			return ((d > -EPSILON) && (d < EPSILON));	// Œë·”ÍˆÍ“à‚È‚ç•½s‚Æ”»’è.
+		}
+
+		// ‰sŠpŠÖŒW‚É‚ ‚é‚©‚ğ•Ô‚µ‚Ü‚·.
+		bool isSharpAngle(const Vector4& r) const {
+			return (dot(r) >= 0.0f);
+		}
+
+		// •ÏŠ· w‚Ì’l‚ğØ‚èÌ‚Ä‚Ä‘ã“ü‚µ‚Ü‚·.
+		operator Vector3();
+	};
+
+
+
 	// ’¼ü
 	struct Line2D {
 		Vector2 position;

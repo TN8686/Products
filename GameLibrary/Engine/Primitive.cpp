@@ -10,6 +10,8 @@ namespace Engine {
 
 	Vector3::operator Vector2() { return Vector2(x, y); }
 
+	Vector4::operator Vector3() { return Vector3(x, y, z); }
+
 	AABB2D::operator Rect() const
 	{
 		return Rect({ position.x - halfLength.x, position.y - halfLength.y },

@@ -158,7 +158,7 @@ namespace Engine {
 		return true;
 	}
 
-	bool ObjectManager::update()
+	bool ObjectManager::preUpdate()
 	{
 		// キーが有効な値かチェック.
 		if (keyHash_ == HASH_DIGEST("")) {
@@ -170,6 +170,26 @@ namespace Engine {
 		}
 		if (!addList_.empty()) {
 			actuallyCreate();	// 追加待ちを追加.
+		}
+
+		// 空き領域の分、offsetして走査.
+		auto& listSet = objectListSet_.at(keyHash_);
+		for (auto itr = listSet.list.begin() + listSet.freeSpaceNum;
+			itr != listSet.list.end(); ++itr) {
+			if ((*itr)->getActive()) {
+				(*itr)->lifeTimeUpdate();
+				(*itr)->preUpdate();
+			}
+		}
+
+		return true;
+	}
+
+	bool ObjectManager::update()
+	{
+		// キーが有効な値かチェック.
+		if (keyHash_ == HASH_DIGEST("")) {
+			return false;
 		}
 
 		// 空き領域の分、offsetして走査.

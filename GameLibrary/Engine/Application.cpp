@@ -15,16 +15,23 @@ namespace Engine {
 	Application::Application()
 		: pScene_(nullptr)
 		, firstTime_(0)
+		, tempScreen_(-1)
 	{
 	}
 
 	// 初期化.
 	bool Application::initialize() {
-		
-		// 描画先画面を裏画面にセット
-		SetDrawScreen(DX_SCREEN_BACK);
 
-		HitChecker::getInstance()->initialize();	// コリジョンマネージャを初期化.
+		SetFontSize(16);	// 仮にフォントサイズ設定.
+
+		// 描画可能な仮画面を作成
+		SetDrawValidGraphCreateFlag(TRUE);	// 描画可能な画像のハンドルを作成するモードに変更
+
+		tempScreen_ = MakeGraph(WindowSize::WIDTH - 1, WindowSize::HEIGHT - 1);	// 仮画面作成、tempScreenにハンドルをセット
+
+		SetDrawValidGraphCreateFlag(FALSE);		// モード解除
+
+		HitChecker::getInstance()->initialize();	// ヒットチェッカーを初期化.
 
 		pScene_ = new GameScene();
 
@@ -42,7 +49,6 @@ namespace Engine {
 		pScene_->init();
 
 		// TODO フレームレート計測周りをクラス化.
-		static bool isSyorioti;
 		static long long fpsTime, fpsFirstTime, fps, fpsCount;
 		fpsFirstTime = GetNowHiPerformanceCount();
 		fps = 0;
@@ -65,12 +71,20 @@ namespace Engine {
 			ret = pScene_->update();
 
 			// 描画.
-			ClearDrawScreen();	// 画面を初期化.
-			pScene_->render();	// 描画.
+			SetDrawScreen(tempScreen_);
+
+			ClearDrawScreen();	// 仮画面クリア.
+
+			pScene_->render();	// 仮画面に描画.
+
+			// 描画先画面を裏画面にセット
+			SetDrawScreen(DX_SCREEN_BACK);
+
+			DrawExtendGraph(0, 0, WindowSize::WIDTH * 3 - 1, WindowSize::HEIGHT * 3 - 1, tempScreen_, true);
 
 			// fps表示.
 			str = std::to_string(fps);
-			DrawString(WindowSize::WIDTH - 16, WindowSize::HEIGHT - 16, str.c_str(), GetColor(0xFF, 0xFF, 0xFF));
+			DrawString((WindowSize::WIDTH - 1) * 3 - 16, (WindowSize::HEIGHT - 1) * 3 - 16, str.c_str(), GetColor(0xFF, 0xFF, 0xFF));
 
 			// 裏画面の内容を表画面に反映させる
 			ScreenFlip();

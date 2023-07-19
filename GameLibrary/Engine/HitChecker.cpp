@@ -262,10 +262,30 @@ namespace Engine {
 		rect1 = a;
 		rect2 = b;
 
-		return	rect1.topLeft.y < rect2.bottomRight.y&&
-				rect1.bottomRight.y > rect2.topLeft.y &&
-				rect1.topLeft.x < rect2.bottomRight.x&&
-				rect1.bottomRight.x > rect2.topLeft.x;
+		return	rect1.topLeft.y < rect2.bottomRight.y &&
+			rect1.bottomRight.y > rect2.topLeft.y &&
+			rect1.topLeft.x < rect2.bottomRight.x &&
+			rect1.bottomRight.x > rect2.topLeft.x;
+
+		/*
+		if (rect1.topLeft.y <= rect2.bottomRight.y && rect1.topLeft.y >= rect2.topLeft.y) {
+			if (rect1.topLeft.x <= rect2.bottomRight.x && rect1.topLeft.x >= rect2.topLeft.x) {
+				return true;
+			}
+			else if (rect1.bottomRight.x <= rect2.bottomRight.x && rect1.bottomRight.x >= rect2.topLeft.x) {
+				return true;
+			}
+		}
+		else if (rect1.bottomRight.y <= rect2.bottomRight.y && rect1.bottomRight.y >= rect2.topLeft.y) {
+			if (rect1.topLeft.x <= rect2.bottomRight.x && rect1.topLeft.x >= rect2.topLeft.x) {
+				return true;
+			}
+			else if (rect1.bottomRight.x <= rect2.bottomRight.x && rect1.bottomRight.x >= rect2.topLeft.x) {
+				return true;
+			}
+		}
+		return false;
+		*/
 	}
 
 	bool HitChecker::AABBOnCircle(AABB2D a, Circle2D b)

@@ -8,6 +8,7 @@ namespace Engine {
 		// メンバ変数 ホントはSceneManagerに置く物.
 		Scene* pScene_;			// シーンのポインタ.
 		long long firstTime_;	// 開始時の時間.
+		int tempScreen_;
 
 		// コンストラクタ.
 	public:

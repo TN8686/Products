@@ -7,6 +7,8 @@
 #include "Primitive.h"
 #include "HitChecker.h"
 
+#include "../Utility/MemoryBuff.h"
+
 
 namespace Engine {
 
@@ -28,9 +30,11 @@ namespace Engine {
 		Vector3 getWorldPosition() const;
 		Vector3 getWorldRotation() const;
 		Vector3 getWorldScale() const;
+
+		// TODO toMatrix4x4‚ğÀ‘•.
 	};
 
-	class GameObject
+	class GameObject : public Utility::IMemoryPool
 	{
 		// ƒƒ“ƒo•Ï”.
 	private:
@@ -91,10 +95,12 @@ namespace Engine {
 			lifeTime_ = 0;
 			return true;
 		}
-		virtual bool update()		{ 
+		bool lifeTimeUpdate() {
 			++lifeTime_;
 			return true;
 		}
+		virtual bool preUpdate()	{ return true; }
+		virtual bool update()		{ return true; }
 		virtual bool lateUpdate()	{ return true; }
 		virtual bool render()		{ return true; }
 		virtual bool unload()		{ return true; }

@@ -148,7 +148,8 @@ namespace Engine {
 	template <class T>
 	class Liner4TreeManager {
 
-		// ヒットするレイヤーの組合せのリスト TODO 直接ここで定義すべきではないが、今だけここで.
+		// ヒットするレイヤーの組合せのリスト
+		// TODO 直接ここで定義すべきではないが、今だけここで　後で外部からロードするように変更.
 		bool combinationList_[15] = {
 
 			//		de		pl		it		at		wl
